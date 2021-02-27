@@ -37,6 +37,17 @@ df = pd.read_csv('data/mystocks.csv', index_col=0, parse_dates=True)
 app = dash.Dash(__name__)
 app.config.suppress_callback_exceptions = True
 
+def generate_table(dataframe, max_rows=10):
+    return html.Table([
+        html.Thead(
+            html.Tr([html.Th(col) for col in dataframe.columns])
+        ),
+        html.Tbody([
+            html.Tr([
+                html.Td(dataframe.iloc[i][col]) for col in dataframe.columns
+            ]) for i in range(min(len(dataframe), max_rows))
+        ])
+    ])
 
 def get_options(list_stocks):
     dict_list = []
@@ -65,15 +76,19 @@ app.layout = html.Div(
                                                       multi=True, value=[df['stock'].sort_values()[0]],
                                                       style={'backgroundColor': '#1E1E1E'},
                                                       className='stockselector'
-                                                      ),
+                                                      )
                                      ],
+
                                      style={'color': '#1E1E1E'})
                                 ]
                              ),
                     html.Div(className='eight columns div-for-charts bg-grey',
                              children=[
-                                 dcc.Graph(id='timeseries', config={'displayModeBar': False}, animate=True)
-                             ])
+                                 dcc.Graph(id='timeseries', config={'displayModeBar': False}, animate=True),
+                                 html.Div([
+                                     generate_table(df[df['stock'] == 'BAH'].tail()),
+                                 ], style={'color': 'white', 'padding': '50px'})
+                             ]),
                               ])
         ]
 
