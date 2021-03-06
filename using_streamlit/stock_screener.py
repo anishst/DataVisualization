@@ -1,3 +1,4 @@
+# SOURCE: https://python.plainenglish.io/building-a-simple-stock-screener-using-streamlit-and-python-plotly-library-a6f04a2e40f9
 import pandas as pd
 import yfinance as yf
 import streamlit as st

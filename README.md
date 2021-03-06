@@ -1,10 +1,11 @@
 # Data Visualization 
 
-Data Visualizaion example using popular Python libs
+Data Visualization examples using popular Python libs
 
-- [ ] Plotly
-- [ ] Stremlit
+- [x] Plotly
+- [x] Streamlit
 - [ ] Bokeh
 - [ ] Seaborn
 - [ ] matplotlib
+- [x] Jupyter notebooks
 
